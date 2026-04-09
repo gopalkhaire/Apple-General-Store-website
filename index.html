@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPTECH | Premium Electronics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="scroll-progress"></div>
+
+
+    //this is page load section in global body
+    <div id="page-loader">
+        <div class="loader-logo">GPTECH</div>
+        <div class="loader-spinner"></div>
+    </div>
+
+
+    //this is our navbar to go different pages
+    <nav>
+        <div class="logo">GPTECH</div>
+        <div class="nav-links">
+            <a href="#home" class="nav-btn active-nav">Home</a>
+            <a href="#shop" class="nav-btn">Shop</a>
+            <a href="#reviews" class="nav-btn">Reviews</a>
+            <a href="#about" class="nav-btn">About</a>
+        </div>
+
+
+        <div class="nav-actions">
+            <i class="fas fa-moon" id="theme-toggle" title="Toggle Theme"></i>
+            <div class="cart-icon-container">
+                <i class="fas fa-shopping-bag" id="cart-btn" title="Open Cart"></i>
+                <span class="cart-badge" id="cart-badge">0</span>
+            </div>
+            <a href="#login" class="nav-btn" id="auth-nav-link"><i class="fas fa-user" title="Account"></i></a>
+        </div>
+    </nav>
+
+
+
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <i class="fas fa-times close-cart" id="close-cart"></i>
+        </div>
+        <div id="cart-items-container"></div>
+        <div class="empty-cart-msg" id="empty-cart-msg">
+            <i class="fas fa-box-open" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+            <p>Your cart is empty.</p>
+        </div>
+        <div class="cart-footer" id="cart-footer" style="display: none;">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">$0.00</span>
+            </div>
+            <button class="btn" style="width: 100%;" onclick="alert('Checkout functionality coming soon!')">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+
+    <section class="page-section active-page" id="home">
+        <div class="hero">
+            <div class="hero-text">
+                <h1>The Future of<br>Technology is Here.</h1>
+                <p>Discover the next generation of smart devices. Designed for performance, engineered for elegance by GPTECH.</p>
+                <button class="btn nav-btn" href="#shop">Explore Collection</button>
+            </div>
+            
+            <div class="cube-wrapper">
+                <div class="cube" id="hero-cube">
+                    <div class="front-side">
+                        <img src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Premium Smartphone">
+                    </div>
+                    <div class="back-side">
+                        <i class="fas fa-bolt"></i>
+                        <div style="font-size: 2rem; font-weight: bold; margin-top: 10px;">GPTECH</div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <a href="#" class="top-x-control" title="Rotate Up"><i class="fas fa-arrow-up"></i></a>
+                    <a href="#" class="bottom-x-control" title="Rotate Down"><i class="fas fa-arrow-down"></i></a>
+                    <a href="#" class="left-y-control" title="Rotate Left"><i class="fas fa-arrow-left"></i></a>
+                    <a href="#" class="right-y-control" title="Rotate Right"><i class="fas fa-arrow-right"></i></a>
+                    <a href="#" class="top-z-control" title="Spin Z"><i class="fas fa-sync-alt"></i></a>
+                    <a href="#" class="bottom-z-control" title="Spin Z"><i class="fas fa-sync-alt fa-flip-horizontal"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page-section" id="shop">
+        <div class="products">
+            <h2 class="section-title">Latest Arrivals</h2>
+            
+            <div class="shop-controls">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Search for products...">
+                </div>
+                <div class="filter-btns">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="phones">Phones</button>
+                    <button class="filter-btn" data-filter="laptops">Laptops</button>
+                    <button class="filter-btn" data-filter="wearables">Wearables</button>
+                </div>
+            </div>
+
+            <div class="product-grid">
+                <div class="product-card animate-on-scroll" data-category="phones">
+                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Phone">
+                    <div class="product-info">
+                        <h3>GP Phone Pro</h3>
+                        <p>$999</p>
+                        <button class="btn add-to-cart-btn" data-price="999" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card animate-on-scroll" data-category="laptops" style="transition-delay: 0.1s;">
+                    <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Laptop">
+                    <div class="product-info">
+                        <h3>GP Book Air</h3>
+                        <p>$1299</p>
+                        <button class="btn add-to-cart-btn" data-price="1299" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card animate-on-scroll" data-category="wearables" style="transition-delay: 0.2s;">
+                    <img src="https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Watch">
+                    <div class="product-info">
+                        <h3>GP Watch Series X</h3>
+                        <p>$399</p>
+                        <button class="btn add-to-cart-btn" data-price="399" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card animate-on-scroll" data-category="wearables" style="transition-delay: 0.3s;">
+                    <img src="https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Earbuds">
+                    <div class="product-info">
+                        <h3>GP Pods Active</h3>
+                        <p>$199</p>
+                        <button class="btn add-to-cart-btn" data-price="199" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page-section" id="reviews">
+        <div class="testimonials">
+            <h2 class="section-title">Loved by Creators</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card animate-on-scroll">
+                    <img src="image.png" alt="User 1" class="user-img">
+                    <p class="quote">"The GP Book Air has completely transformed my editing workflow. The battery life is unbelievable."</p>
+                    <h4>Gopal Khaire</h4>
+                    <span>Creative Director</span>
+                </div>
+                <div class="testimonial-card animate-on-scroll" style="transition-delay: 0.2s;">
+                    <img src="image2.jpeg" alt="User 2" class="user-img">
+                    <p class="quote">"Switching to the GP Phone Pro was the best decision. The camera quality rivals my DSLR."</p>
+                    <h4>Gopal Khaire</h4>
+                    <span>Photographer</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page-section" id="about">
+        <div class="about-container">
+            <div class="about-content animate-on-scroll">
+                <h2 class="section-title">About GPTECH</h2>
+                <p>Founded in 2024, GPTECH is dedicated to pushing the boundaries of what's possible. We don't just build electronics; we engineer seamless experiences that empower you to do more.</p>
+                <p>Our mission is to bring premium, sustainable, and highly intuitive technology to creators, professionals, and visionaries around the world.</p>
+                <div class="stats">
+                    <div><h3>500K+</h3><p>Happy Customers</p></div>
+                    <div><h3>50+</h3><p>Global Stores</p></div>
+                    <div><h3>24/7</h3><p>Support</p></div>
+                </div>
+            </div>
+            <div class="about-img animate-on-scroll" style="transition-delay: 0.2s;">
+                <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="GPTECH Office">
+            </div>
+        </div>
+    </section>
+
+    <section class="page-section" id="login">
+        <div class="auth-container animate-on-scroll">
+            <h2>Welcome Back</h2>
+            <p>Sign in to your GPTECH account</p>
+            <form id="login-form">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" placeholder="Email Address" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Sign In</button>
+            </form>
+            <p class="auth-switch">Don't have an account? <a href="#">Sign up</a></p>
+        </div>
+    </section>
+
+    <section class="page-section" id="profile">
+        <div class="profile-container animate-on-scroll">
+            <div class="profile-header">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Profile" class="user-img">
+                <h2>John Doe</h2>
+                <p>Premium Member</p>
+            </div>
+            <div class="profile-details">
+                <div class="detail-card">
+                    <i class="fas fa-box"></i>
+                    <h3>Orders</h3>
+                    <p>3 Active Orders</p>
+                </div>
+                <div class="detail-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Wishlist</h3>
+                    <p>5 Saved Items</p>
+                </div>
+                <div class="detail-card">
+                    <i class="fas fa-cog"></i>
+                    <h3>Settings</h3>
+                    <p>Account Preferences</p>
+                </div>
+            </div>
+            <button class="btn" id="logout-btn" style="background-color: #ef4444; margin-top: 2rem;">Log Out</button>
+        </div>
+    </section>
+
+    <div class="modal-overlay" id="quick-view-modal">
+        <div class="modal-content">
+            <i class="fas fa-times close-modal" id="close-modal"></i>
+            <div class="modal-body">
+                <img src="" id="modal-img" alt="Product">
+                <div class="modal-info">
+                    <h2 id="modal-title">Product Name</h2>
+                    <p id="modal-price" class="price">$0.00</p>
+                    <p class="modal-desc">Experience the pinnacle of engineering with our latest smart device. Features an all-day battery, ultra-fast processing, and an immersive display.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="#home" class="scroll-to-top" id="scrollTopBtn">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>

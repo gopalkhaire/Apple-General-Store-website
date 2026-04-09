@@ -1,0 +1,277 @@
+/* ==========================================
+   1. GOOGLE FONTS & CSS VARIABLES
+   ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --bg-color: #0f172a;
+    --text-color: #f8fafc;
+    --nav-bg: rgba(15, 23, 42, 0.8);
+    --card-bg: #1e293b;
+    --accent-color: #0ea5e9;
+    --accent-hover: #0284c7;
+    --border-color: #334155;
+    --glow: 0 0 15px rgba(14, 165, 233, 0.5);
+    --transition: all 0.3s ease;
+}
+
+/* Light Theme Overrides */
+[data-theme="light"] {
+    --bg-color: #f8fafc;
+    --text-color: #0f172a;
+    --nav-bg: rgba(248, 250, 252, 0.8);
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;
+    --glow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+/* ==========================================
+   2. BASE STYLES & RESETS
+   ========================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+body { background-color: var(--bg-color); color: var(--text-color); transition: var(--transition); overflow-x: hidden; scroll-behavior: smooth; }
+a { text-decoration: none; color: inherit; }
+
+/* Scroll Progress Bar */
+#scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: var(--accent-color); z-index: 10001; transition: width 0.1s ease; box-shadow: var(--glow); }
+
+/* Global Buttons */
+.btn { padding: 1rem 2.5rem; background-color: var(--accent-color); color: #fff; border: none; border-radius: 30px; font-size: 1.1rem; cursor: pointer; transition: var(--transition); font-weight: 600; display: inline-block; }
+.btn:hover { background-color: var(--accent-hover); transform: translateY(-3px); box-shadow: var(--glow); }
+
+
+/* ==========================================
+   3. NAVIGATION BAR
+   ========================================== */
+nav { position: fixed; top: 0; width: 100%; padding: 1.5rem 5%; display: flex; justify-content: space-between; align-items: center; background: var(--nav-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid var(--border-color); }
+.logo { font-size: 1.5rem; font-weight: 700; letter-spacing: 2px; color: var(--accent-color); text-shadow: var(--glow); }
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a { font-weight: 500; transition: var(--transition); cursor: pointer; }
+.nav-links a:hover, .nav-links a.active-nav { color: var(--accent-color); }
+.nav-actions { display: flex; gap: 1.5rem; font-size: 1.2rem; cursor: pointer; align-items: center;}
+.nav-actions i:hover { color: var(--accent-color); transform: scale(1.1); transition: var(--transition); }
+
+/* Cart Badge */
+.cart-icon-container { position: relative; }
+.cart-badge { position: absolute; top: -8px; right: -8px; background: #ef4444; color: white; font-size: 0.7rem; font-weight: bold; width: 18px; height: 18px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }
+
+
+/* ==========================================
+   4. SPA PAGE ROUTING STRUCTURE
+   ========================================== */
+.page-section { display: none; min-height: 100vh; padding-top: 80px; animation: fadeIn 0.5s ease; }
+.page-section.active-page { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+
+/* ==========================================
+   5. PAGE: HERO SECTION & 3D CUBE
+   ========================================== */
+.hero { height: calc(100vh - 80px); display: flex; align-items: center; justify-content: space-between; padding: 0 10%; }
+.hero-text h1 { font-size: 4rem; line-height: 1.2; margin-bottom: 1rem; background: linear-gradient(to right, var(--accent-color), #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-text p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.8; max-width: 500px; }
+
+/* Restored 3D Cube Hero */
+.cube-wrapper { 
+    perspective: 1000px; 
+    position: relative; 
+    margin-right: 5%; 
+    z-index: 10;
+}
+
+.cube { 
+    width: 300px; 
+    height: 500px; 
+    transform-style: preserve-3d; 
+    transform: rotateX(0) rotateY(20deg) rotateZ(0); 
+    transition: transform 0.5s; 
+    position: relative; 
+}
+
+.front-side, .back-side { 
+    width: 100%; 
+    height: 100%; 
+    position: absolute; 
+    transform-style: preserve-3d; 
+    background: var(--card-bg); 
+    border-radius: 20px; 
+    border: 1px solid var(--border-color); 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3); 
+    overflow: hidden; 
+}
+
+/* Push front face out slightly, push back face backward */
+.front-side { transform: translateZ(25px); display: flex; justify-content: center; align-items: center;}
+.front-side img { width: 100%; height: 100%; object-fit: cover; }
+.back-side { transform: translateZ(-25px) rotateY(180deg); display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--accent-color); }
+.back-side i { font-size: 8rem; text-shadow: var(--glow); }
+
+/* Circular Controls */
+.controls { 
+    position: absolute; 
+    bottom: -80px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 100px; 
+    height: 100px; 
+    background-color: var(--card-bg); 
+    border-radius: 50%; 
+    border: 3px solid var(--border-color); 
+    box-shadow: var(--glow); 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+.controls a { position: absolute; color: var(--text-color); transition: var(--transition); font-size: 1.2rem;}
+.controls a:hover { color: var(--accent-color); transform: scale(1.2); }
+.controls a:nth-child(1) { top: 10px; }
+.controls a:nth-child(2) { bottom: 10px; }
+.controls a:nth-child(3) { left: 10px; }
+.controls a:nth-child(4) { right: 10px; }
+.controls a:nth-child(5) { top: 20px; right: 20px; transform: rotate(45deg); }
+.controls a:nth-child(6) { bottom: 20px; left: 20px; transform: rotate(45deg); }
+
+
+/* ==========================================
+   6. PAGE: SHOP (Products, Filters, Search)
+   ========================================== */
+.products, .testimonials { padding: 5rem 10%; text-align: center; }
+.section-title { font-size: 2.5rem; margin-bottom: 2rem; text-align: center; }
+
+/* Shop Controls (Search & Filters) */
+.shop-controls { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-bottom: 3rem; }
+.search-bar { position: relative; width: 100%; max-width: 400px; }
+.search-bar i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--accent-color); }
+.search-bar input { width: 100%; padding: 0.8rem 1rem 0.8rem 40px; border-radius: 30px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); outline: none; font-family: 'Poppins'; transition: var(--transition); }
+.search-bar input:focus { border-color: var(--accent-color); box-shadow: var(--glow); }
+
+.filter-btns { display: flex; justify-content: center; gap: 1rem; }
+.filter-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-color); padding: 0.5rem 1.5rem; border-radius: 20px; cursor: pointer; transition: var(--transition); }
+.filter-btn.active, .filter-btn:hover { background: var(--accent-color); color: #fff; border-color: var(--accent-color); box-shadow: var(--glow); }
+
+/* Product Grid */
+.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+.product-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 15px; padding: 1.5rem; transition: var(--transition); opacity: 0; transform: translateY(30px); cursor: pointer; }
+.product-card.show { opacity: 1; transform: translateY(0); }
+.product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); border-color: var(--accent-color); }
+.product-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem; }
+.product-info h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+.product-info p { color: var(--accent-color); font-weight: 600; font-size: 1.1rem; margin-bottom: 1rem; }
+
+
+/* ==========================================
+   7. PAGE: REVIEWS (Testimonials)
+   ========================================== */
+.testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+.testimonial-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 2rem; opacity: 0; transform: translateY(30px); transition: var(--transition); text-align: center; }
+.testimonial-card.show { opacity: 1; transform: translateY(0); }
+.user-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent-color); margin-bottom: 1rem; }
+.quote { font-style: italic; margin-bottom: 1.5rem; opacity: 0.8; }
+.testimonial-card h4 { color: var(--accent-color); }
+
+
+/* ==========================================
+   8. PAGE: ABOUT
+   ========================================== */
+.about-container { display: flex; align-items: center; justify-content: space-between; padding: 5rem 10%; gap: 4rem; }
+.about-content { flex: 1; }
+.about-content p { font-size: 1.1rem; opacity: 0.8; margin-bottom: 1.5rem; line-height: 1.6; }
+.stats { display: flex; gap: 2rem; margin-top: 2rem; }
+.stats h3 { color: var(--accent-color); font-size: 2rem; }
+.about-img { flex: 1; }
+.about-img img { width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+
+
+/* ==========================================
+   9. PAGE: AUTH & PROFILE
+   ========================================== */
+/* Login Form */
+.auth-container { max-width: 400px; margin: 5rem auto; background: var(--card-bg); padding: 3rem; border-radius: 20px; border: 1px solid var(--border-color); text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+.auth-container h2 { margin-bottom: 0.5rem; }
+.auth-container p { opacity: 0.7; margin-bottom: 2rem; }
+.input-group { position: relative; margin-bottom: 1.5rem; }
+.input-group i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--accent-color); }
+.input-group input { width: 100%; padding: 1rem 1rem 1rem 40px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-color); outline: none; }
+.input-group input:focus { border-color: var(--accent-color); }
+.auth-switch { margin-top: 1.5rem; font-size: 0.9rem; }
+.auth-switch a { color: var(--accent-color); font-weight: 600; }
+
+/* Profile Dashboard */
+.profile-container { max-width: 800px; margin: 5rem auto; text-align: center; }
+.profile-header { margin-bottom: 3rem; }
+.profile-header h2 { font-size: 2rem; margin-top: 1rem; }
+.profile-header p { color: var(--accent-color); }
+.profile-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+.detail-card { background: var(--card-bg); padding: 2rem; border-radius: 15px; border: 1px solid var(--border-color); transition: var(--transition); cursor: pointer; }
+.detail-card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
+.detail-card i { font-size: 2rem; color: var(--accent-color); margin-bottom: 1rem; }
+
+
+/* ==========================================
+   10. MODALS, SIDEBARS & UTILITIES
+   ========================================== */
+
+/* Cart Sidebar Container */
+.cart-sidebar { position: fixed; top: 0; right: -100%; width: 350px; height: 100vh; background: var(--card-bg); border-left: 1px solid var(--border-color); z-index: 1001; padding: 2rem; display: flex; flex-direction: column; transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
+.cart-sidebar.open { right: 0; }
+.cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; font-size: 1.5rem; }
+.close-cart { cursor: pointer; color: var(--accent-color); transition: var(--transition); }
+.close-cart:hover { transform: rotate(90deg); }
+.empty-cart-msg { text-align: center; opacity: 0.6; margin-top: 50%; }
+
+/* Dynamic Cart Items */
+#cart-items-container { flex: 1; overflow-y: auto; padding-right: 10px; }
+.cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding: 1rem 0; }
+.cart-item-info h4 { font-size: 1rem; font-weight: 500; }
+.cart-item-info p { color: var(--accent-color); font-size: 0.9rem; font-weight: 600; margin-top: 5px; }
+.remove-item { color: #ef4444; cursor: pointer; transition: var(--transition); }
+.remove-item:hover { transform: scale(1.2); }
+.cart-footer { margin-top: 1rem; border-top: 1px solid var(--border-color); padding-top: 1.5rem; }
+.cart-total { font-size: 1.2rem; font-weight: bold; margin-bottom: 1.5rem; display: flex; justify-content: space-between;}
+
+/* Initial Page Loader */
+#page-loader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg-color); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease, visibility 0.5s ease; }
+.loader-logo { font-size: 2.5rem; font-weight: 700; color: var(--accent-color); letter-spacing: 5px; margin-bottom: 20px; animation: pulse 1.5s infinite; }
+.loader-spinner { width: 40px; height: 40px; border: 3px solid var(--border-color); border-top-color: var(--accent-color); border-radius: 50%; animation: spin 1s linear infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Quick View Modal */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 2000; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: var(--transition); }
+.modal-overlay.active { opacity: 1; visibility: visible; }
+.modal-content { background: var(--card-bg); width: 90%; max-width: 800px; border-radius: 20px; border: 1px solid var(--border-color); position: relative; padding: 2rem; transform: scale(0.9); transition: var(--transition); display: flex; gap: 2rem; }
+.modal-overlay.active .modal-content { transform: scale(1); }
+.close-modal { position: absolute; top: 20px; right: 20px; font-size: 1.5rem; cursor: pointer; color: var(--text-color); transition: var(--transition); }
+.close-modal:hover { color: var(--accent-color); transform: rotate(90deg); }
+.modal-body { display: flex; gap: 2rem; width: 100%; align-items: center; }
+#modal-img { width: 50%; border-radius: 15px; object-fit: cover; }
+.modal-info { width: 50%; display: flex; flex-direction: column; gap: 1rem; }
+.modal-info h2 { font-size: 2rem; }
+.modal-info .price { font-size: 1.5rem; color: var(--accent-color); font-weight: 600; }
+.modal-desc { opacity: 0.8; line-height: 1.6; }
+
+/* Toast Notifications */
+#toast-container { position: fixed; bottom: 20px; left: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
+.toast { background-color: var(--accent-color); color: white; padding: 1rem 2rem; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); font-weight: 500; animation: slideIn 0.3s forwards, fadeOut 0.3s forwards 2.7s; }
+@keyframes slideIn { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+/* Scroll To Top Button */
+.scroll-to-top { position: fixed; bottom: 30px; right: 30px; background: var(--accent-color); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; cursor: pointer; opacity: 0; visibility: hidden; transition: var(--transition); z-index: 999; box-shadow: var(--glow); }
+.scroll-to-top.visible { opacity: 1; visibility: visible; }
+.scroll-to-top:hover { transform: translateY(-5px); background: var(--accent-hover); }
+
+
+/* ==========================================
+   11. RESPONSIVE MEDIA QUERIES
+   ========================================== */
+@media (max-width: 768px) {
+    .hero { flex-direction: column; text-align: center; justify-content: center; gap: 3rem; height: auto; padding: 5rem 10%; }
+    .hero-text h1 { font-size: 3rem; }
+    .about-container { flex-direction: column; text-align: center; }
+    .nav-links { display: none; } 
+    .modal-body { flex-direction: column; text-align: center; }
+    #modal-img, .modal-info { width: 100%; }
+}
